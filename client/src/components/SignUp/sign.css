@@ -1,0 +1,49 @@
+@import '~antd/dist/antd.css';
+
+.signup_wrapper {
+  margin: 180px auto;
+  width: 400px;
+  /* height: 280px; */
+  border: 1px solid #f0f0f0;
+}
+
+.signup_wrapper .input_wrapper {
+  margin: 37px auto 28px;
+  width: 298px;
+}
+
+.input_wrapper .input_item {
+  margin-bottom: 11px;
+  height: 37px;
+  line-height: 37px;
+  border-bottom: 1px solid #6381db;
+}
+
+.input_wrapper .input_item .icon {
+  margin-right: 14px;
+  color: #c7c7c7;
+  font-size: 14px;
+}
+
+.input_wrapper .input_item .user_input {
+  display: inline-block;
+  border: none;
+  font-size: 14px;
+  outline: none;
+}
+
+.signup_wrapper .create_account {
+  display: block;
+  margin: 0 auto 40px; 
+  padding: 0;
+  border: none;
+  width: 298px;
+  height: 35px;
+  border-radius: 2px;
+  background-color: #6381db;
+  font-size: 14px;
+  font-weight: 200;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
