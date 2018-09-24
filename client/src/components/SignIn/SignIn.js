@@ -1,23 +1,70 @@
-import React from 'react'
+import React from "react";
+import { Form, Icon, Button, Input, Checkbox } from "antd"
+import { Link } from "react-router-dom"
+import axios from "axios";
 
-import '../SignUp/sign.css'
+import "../SignUp/sign.less";
 
-export default class SignIn extends React.Component {
-  render () {
+const FormItem = Form.Item
+
+class SignIn extends React.Component {
+  handleSubmit = e => {
+    e.preventDefault()
+    this.props.form.validateFields((err) => {
+      if (!err) {
+        axios
+          .post("/user/signin", {
+            email: this.props.form.getFieldValue('email'),
+            password: this.props.form.getFieldValue('password')
+          })
+          .then(response => {
+            console.log(response)
+            this.props.history.push('/userinterface')
+          })
+          .catch(e => {
+            alert(e);
+          });
+      }
+    })
+  };
+
+  render() {
+    const { getFieldDecorator } = this.props.form
+
     return (
-      <div className="signup_wrapper">
-        <div className="input_wrapper">
-          <div className="input_item">
-            <span className="icon">邮箱</span>
-            <input className="user_input" type="text" placeholder="邮箱"/>
-          </div>
-          <div className="input_item">
-            <span className="icon">密码</span>
-            <input className="user_input" type="text" placeholder="密码"/>
-          </div>
-        </div>
-        <button className="create_account">登录</button>
+      <div className="sign-form">
+        <Form onSubmit={this.handleSubmit}>
+          <FormItem>
+            {getFieldDecorator('email', {
+              rules: [{required: true, message: '请输入用户名!'}]
+            })(
+              <Input prefix={<Icon type="mail" style={{ color: '#c7c7c7' }} />} placeholder="E-mail" />
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('password', {
+              rules: [{required: true, message: '请输入密码!'}]
+            })(
+              <Input prefix={<Icon type="lock" style={{ color: '#c7c7c7'}} />} type="password" placeholder="Password"/>
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('remerber', {
+              valuePropName: 'checked',
+              initialValue: true
+            })(
+              <Checkbox>Remember me</Checkbox>
+            )}
+            <a className="signin-form-forgot" href="">Forgot password</a>
+            <Button type="primary" htmlType="submit" className="sign-form-button">
+              Log in
+            </Button>
+            Or <Link to="/signup">Register now!</Link>
+          </FormItem>
+        </Form>
       </div>
-    )
+    );
   }
 }
+
+export default Form.create()(SignIn)

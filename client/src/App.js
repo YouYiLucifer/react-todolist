@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 
-// import Tab from './components/Tab/Tab'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import UserInterFace from './components/UserInterFace/UserInterFace'
@@ -15,7 +14,7 @@ class App extends Component {
       <Router history={history}>
         <div className="App">
           <Switch>
-            <Redirect from={'/'} to={'/signup'} exact />
+            <Redirect from={'/'} to={'/signin'} exact />
             <Route path={'/signup'} component={SignUp} />
             <Route path={'/signin'} component={SignIn} />
             <Route path={'/userinterface'} component={UserInterFace} />

@@ -1,8 +1,19 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom';
+import axios from 'axios'
 
 import './tab.css'
 
-export default class Tab extends React.Component {
+class Tab extends React.Component {
+  toSignOut = () => {
+    axios
+      .post('/user/signout')
+      .then(res => {
+        console.log(res)
+      })
+    this.props.history.push('/signin')
+  }
+
   render () {
     return (
         <div className="tab">
@@ -26,7 +37,10 @@ export default class Tab extends React.Component {
               </li>
             </ul>
           </div>
+          <button onClick={this.toSignOut}>登出</button>
         </div>
     )
   }
 }
+
+export default withRouter(Tab);
