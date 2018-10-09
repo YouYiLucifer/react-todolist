@@ -1,0 +1,39 @@
+@blue: #167ddd;
+@font-color: rgba(255, 255, 255, 0.65);
+
+.side-bar-wrapper {
+  // display: flex;
+  flex: 0 1 260px;
+  flex-direction: column;
+  min-width: 180px;
+  height: 100vh;
+  background: @blue;
+  font-weight: 300;
+
+  .user {
+    padding: 20px;
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    .user-name {
+      margin-left: 10px;
+      font-size: 18px;
+      line-height: 30px;
+      color: @font-color;
+    }
+
+    .sign-out {
+      float: right;
+      line-height: 30px;
+      color: @font-color;
+    }
+
+    .sign-out:hover {
+      color: #fff;
+    }
+  }
+}

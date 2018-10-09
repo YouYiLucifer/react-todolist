@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 
-import SignUp from './components/SignUp/SignUp'
-import SignIn from './components/SignIn/SignIn'
-import UserInterFace from './components/UserInterFace/UserInterFace'
+import SignUp from './components/sign-up/sign-up'
+import SignIn from './components/sign-in/sign-in'
+import UserInterFace from './components/user-interface/user-interface'
 
 const history = createBrowserHistory()
 

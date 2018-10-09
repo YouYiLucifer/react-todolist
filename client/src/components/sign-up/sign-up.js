@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { Form, Input, Checkbox, Button } from "antd";
 
 import "./sign.less";
-import axios from "../../../node_modules/axios";
+import axios from "axios";
 
 const FormItem = Form.Item;
 
@@ -29,7 +29,7 @@ class SignUp extends React.Component {
           })
           .then(response => {
             console.log(response)
-            this.props.history.push("/userinterface")
+            this.props.history.push("/signin")
           })
           .catch(e => {
             alert(e)
@@ -62,20 +62,24 @@ class SignUp extends React.Component {
     callback()
   }
 
+  _handleClick = e => {
+    e.preventDefaulf()
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
 
     return (
       <div className="sign-form">
         <Form onSubmit={this.handleSubmit}>
-          <FormItem label="email">
+          <FormItem label="邮箱">
             {getFieldDecorator("email", {
               rules: [
                 { required: true, message: "请输入邮箱!" }
               ]
             })(<Input />)}
           </FormItem>
-          <FormItem label="Password">
+          <FormItem label="密码">
             {getFieldDecorator("password", {
               rules: [
                 { required: true, message: "请输入密码!" },
@@ -84,7 +88,7 @@ class SignUp extends React.Component {
               ]
             })(<Input type="password" />)}
           </FormItem>
-          <FormItem label="Confirm Password">
+          <FormItem label="确认密码">
             {getFieldDecorator("confirm", {
               rules: [
                 { required: true, message: "请确认密码!" },
@@ -92,7 +96,7 @@ class SignUp extends React.Component {
               ]
             })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
           </FormItem>
-          <FormItem label="username">
+          <FormItem label="用户名">
             {getFieldDecorator('username', {
               rules: [
                 {required: false}
@@ -104,7 +108,7 @@ class SignUp extends React.Component {
               valuePropName: "checked"
             })(
               <Checkbox>
-                I have read the <a href="">agreement</a>
+                已阅读并同意<a href="" onClick={this._handleClick}>协议</a>
               </Checkbox>
             )}
           </FormItem>
@@ -114,9 +118,9 @@ class SignUp extends React.Component {
               htmlType="submit"
               className="sign-form-button"
             >
-              Register
+              免费注册
             </Button>
-            Or <Link to="/signin">Log in</Link>
+            <Link to="/signin">去登录！</Link>
           </FormItem>
         </Form>
       </div>

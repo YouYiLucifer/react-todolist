@@ -3,7 +3,7 @@ import { Form, Icon, Button, Input, Checkbox } from "antd"
 import { Link } from "react-router-dom"
 import axios from "axios";
 
-import "../SignUp/sign.less";
+import "../sign-up/sign.less";
 
 const FormItem = Form.Item
 
@@ -28,6 +28,10 @@ class SignIn extends React.Component {
     })
   };
 
+  _handleClick = e => {
+    e.preventDefault()
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form
 
@@ -38,14 +42,14 @@ class SignIn extends React.Component {
             {getFieldDecorator('email', {
               rules: [{required: true, message: '请输入用户名!'}]
             })(
-              <Input prefix={<Icon type="mail" style={{ color: '#c7c7c7' }} />} placeholder="E-mail" />
+              <Input prefix={<Icon type="mail" style={{ color: '#c7c7c7' }} />} placeholder="邮箱" />
             )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
               rules: [{required: true, message: '请输入密码!'}]
             })(
-              <Input prefix={<Icon type="lock" style={{ color: '#c7c7c7'}} />} type="password" placeholder="Password"/>
+              <Input prefix={<Icon type="lock" style={{ color: '#c7c7c7'}} />} type="password" placeholder="密码"/>
             )}
           </FormItem>
           <FormItem>
@@ -53,13 +57,13 @@ class SignIn extends React.Component {
               valuePropName: 'checked',
               initialValue: true
             })(
-              <Checkbox>Remember me</Checkbox>
+              <Checkbox>记住</Checkbox>
             )}
-            <a className="signin-form-forgot" href="">Forgot password</a>
+            <a className="signin-form-forgot" href="" onClick={this._handleClick}>忘记密码</a>
             <Button type="primary" htmlType="submit" className="sign-form-button">
               Log in
             </Button>
-            Or <Link to="/signup">Register now!</Link>
+            <Link to="/signup">立即注册!</Link>
           </FormItem>
         </Form>
       </div>
