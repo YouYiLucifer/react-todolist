@@ -1,26 +1,27 @@
 import React from 'react'
-import { List } from 'antd'
+import { connect } from 'react-redux'
 
-import TitleInput from './dumb-components/title-input'
+import TitleInput from './containers/todo-input'
+import TodoList from './containers/todo-list'
 import './task.less'
 
-// const data = [
-//   'Racing car sprays burning fuel into crowd.',
-//   'Japanese princess to wed commoner.',
-//   'Australian walks 100km after outback crash.',
-//   'Man charged over missing wedding girl.',
-//   'Los Angeles battles huge wildfires.',
-// ];
-
-export default class Task extends React.Component {
+class Task extends React.Component {
   render () {
+    const { currentTag } = this.props
     return (
       <div className="list-wrapper">
-        <h1 style={{fontWeight: "200"}}>Tab</h1>
-        <TitleInput/>
-        <List/>
-        <p>222</p>
+      <h1 style={{fontWeight: "200"}}>{currentTag}</h1>
+      <TitleInput />
+      <TodoList/>
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    ...state
+  }
+}
+
+export default connect(mapStateToProps)(Task)

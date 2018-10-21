@@ -1,8 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import './content.less'
 
-export default class Content extends React.Component {
+class Content extends React.Component {
   constructor () {
     super()
     this.state = {
@@ -32,19 +33,39 @@ export default class Content extends React.Component {
     }
   }
 
+  aaa = ()=> {
+    console.log(this.props.currentTodoId)
+  }
+
   render () {
+    const { currentTag, currentTodoId } = this.props
+    const todos = this.props.todos.filter(item => item.tag === currentTag)
+
     return (
       <div className="content-wrapper">
-        <h2 className="title">Title</h2>
+        <h3 onClick={this.aaa}>{todos[0].title}</h3>
         <textarea
           className="content-detail"
           value={this.state.textareaValue}
           onChange={this.handleTextareaChange}
           onFocus={this.handleTextareaOnFocus}
           onBlur={this.handleTextareaOnBlur}>
-          fff
         </textarea>
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    ...state
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content)
