@@ -6,9 +6,9 @@ import { deleteTodo, changeTodoId } from '../../reducer/index'
 import TodoList from '../dumb-components/todo-list'
 
 class TodoListContainer extends React.Component {
-  handleIndexChange = index => {
+  handleIndexChange = (todos, index) => {
     this.props.changeTodoId(index)
-    console.log(index)
+    console.log(this.props)
   }
 
   render () {
@@ -23,7 +23,7 @@ class TodoListContainer extends React.Component {
               key={index}
               index={index}
               todo={item}
-              onIndexChange={this.handleIndexChange}/>
+              onIndexChange={ () => this.handleIndexChange(todos, index)}/>
           </List.Item>
         }>
       </List>

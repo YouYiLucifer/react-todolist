@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { contentEdit } from '../reducer/index'
 
 import './content.less'
 
@@ -31,10 +32,11 @@ class Content extends React.Component {
         textareaValue: '写点什么吧...'
       })
     }
+    this.props.contentEdit()
   }
 
   aaa = ()=> {
-    console.log(this.props.currentTodoId)
+    console.log(this.props)
   }
 
   render () {
@@ -46,7 +48,7 @@ class Content extends React.Component {
         <h3 onClick={this.aaa}>{todos[0].title}</h3>
         <textarea
           className="content-detail"
-          value={this.state.textareaValue}
+          value={todos[0].content}
           onChange={this.handleTextareaChange}
           onFocus={this.handleTextareaOnFocus}
           onBlur={this.handleTextareaOnBlur}>
@@ -64,7 +66,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    contentEdit (e) {
+      dispatch(contentEdit(e))
+    }
   }
 }
 
