@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import TitleInput from '../dumb-components/todo-input'
-import { addTodo } from '../../reducer/index'
+import { addTodo } from '../../reducer/actions'
 
 class TitleInputContainer extends React.Component {
   handleEnter = todo => {

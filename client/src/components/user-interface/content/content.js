@@ -1,58 +1,40 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { contentEdit } from '../reducer/index'
+import { contentEdit } from '../reducer/actions'
 
 import './content.less'
 
 class Content extends React.Component {
-  constructor () {
-    super()
-    this.state = {
-      textareaValue: '写点什么吧...'
-    }
-  }
-
-  handleTextareaChange = e => {
-    this.setState({
-      textareaValue: e.target.value
-    })
-  }
-
-  handleTextareaOnFocus = () => {
-    if (this.state.textareaValue === '写点什么吧...') {
-      this.setState({
-        textareaValue: ''
-      })
-    }
+  handleTextareaChange = (e, id) => {
+    this.props.contentEdit(e.target.value, id)
   }
 
   handleTextareaOnBlur = () => {
-    if (this.state.textareaValue.trim() === '') {
-      this.setState({
-        textareaValue: '写点什么吧...'
-      })
-    }
-    this.props.contentEdit()
-  }
 
-  aaa = ()=> {
-    console.log(this.props)
   }
 
   render () {
     const { currentTag, currentTodoId } = this.props
-    const todos = this.props.todos.filter(item => item.tag === currentTag)
+    const todos = this.props.todos.filter(todo => todo.tag === currentTag)
+    const todo = todos[currentTodoId]
 
     return (
       <div className="content-wrapper">
-        <h3 onClick={this.aaa}>{todos[0].title}</h3>
-        <textarea
-          className="content-detail"
-          value={todos[0].content}
-          onChange={this.handleTextareaChange}
-          onFocus={this.handleTextareaOnFocus}
-          onBlur={this.handleTextareaOnBlur}>
-        </textarea>
+        {todo
+          ? 
+          <div>
+            <h3>{todo.title}</h3>
+            <textarea
+              className="content-detail"
+              value={todo ? todo.content : ''}
+              placeholder='写点什么吧...'
+              onChange={(e) => this.handleTextareaChange(e, todo.id)}
+              onBlur={this.handleTextareaOnBlur}>]
+            </textarea>
+          </div>
+          : 
+          <h2>No data</h2>
+        }
       </div>
     )
   }
@@ -66,8 +48,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    contentEdit (e) {
-      dispatch(contentEdit(e))
+    contentEdit (e, id) {
+      dispatch(contentEdit(e, id))
     }
   }
 }

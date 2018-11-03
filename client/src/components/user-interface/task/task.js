@@ -10,9 +10,11 @@ class Task extends React.Component {
     const { currentTag } = this.props
     return (
       <div className="list-wrapper">
-      <h1 style={{fontWeight: "200"}}>{currentTag}</h1>
-      <TitleInput />
-      <TodoList/>
+        <div className="head">
+          <h1 style={{fontWeight: "200"}}>{currentTag}</h1>
+          <TitleInput />
+        </div>
+        <TodoList/>
       </div>
     )
   }

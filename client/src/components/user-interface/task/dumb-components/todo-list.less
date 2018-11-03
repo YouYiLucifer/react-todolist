@@ -1,0 +1,41 @@
+@time-color: rgba(0, 0, 0, 0.2);
+@icon-color: rgba(0, 0, 0, 0.2);
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  width: 100%;
+
+  .checkbox {
+    display: inline-block;
+    padding: 4px;
+    margin-right: 10px;
+  }
+
+  .title-wrapper {
+    flex: 1;
+    
+    .title {
+      margin: 0 20px 6px 0;
+      max-width: 400px;
+      min-width: 190px;
+    }
+
+    .create-time {
+      color: @time-color;
+      font-size: 12px;
+    }
+  }
+
+  .deleted {
+    padding: 4px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+}
+
+.isChecked {
+  color: @icon-color;
+}

@@ -1,14 +1,27 @@
 import React from 'react'
 import { List } from 'antd'
 import { connect } from 'react-redux'
-import { deleteTodo, changeTodoId } from '../../reducer/index'
+import { deleteTodo, removeTodo, changeTodoId, toggleTodoTag } from '../../reducer/actions'
 
 import TodoList from '../dumb-components/todo-list'
+import './todo-list.less'
 
 class TodoListContainer extends React.Component {
-  handleIndexChange = (todos, index) => {
+  handleIndexChange = (todo, index) => {
     this.props.changeTodoId(index)
-    console.log(this.props)
+    console.log(todo)
+  }
+
+  handleCheckedChange = id => {
+    this.props.toggleTodoTag(id)
+  }
+
+  handleTodoDelete = id => {
+    this.props.deleteTodo(id)
+  }
+
+  handleTodoRemove = id => {
+    this.props.removeTodo(id)
   }
 
   render () {
@@ -17,13 +30,19 @@ class TodoListContainer extends React.Component {
     return (
       <List
         dataSource={todos}
-        renderItem={(item, index) => 
-          <List.Item key={index}>
-            <TodoList
-              key={index}
-              index={index}
-              todo={item}
-              onIndexChange={ () => this.handleIndexChange(todos, index)}/>
+        renderItem={(todo, index) => 
+          <List.Item
+            className="list-item"
+            key={todo.id}
+            style={{cursor: 'pointer'}}
+            onClick={() => this.handleIndexChange(todo, index)}>
+              <TodoList
+                key={todo.id}
+                todo={todo}
+                onCheckedChange={this.handleCheckedChange}
+                onTodoDelete={this.handleTodoDelete}
+                onTodoRemove={this.handleTodoRemove}
+              />
           </List.Item>
         }>
       </List>
@@ -39,11 +58,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteTodo (index) {
-      dispatch(deleteTodo(index))
+    deleteTodo (id) {
+      dispatch(deleteTodo(id))
+    },
+    removeTodo (id) {
+      dispatch(removeTodo(id))
     },
     changeTodoId (index) {
       dispatch(changeTodoId(index))
+    },
+    toggleTodoTag (id) {
+      dispatch(toggleTodoTag(id))
     }
   }
 }

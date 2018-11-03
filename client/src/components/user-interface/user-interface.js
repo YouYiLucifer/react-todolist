@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
-import reducer from './reducer/index'
+import reducer from './reducer/reducer'
 import SideBar from './side-bar/side-bar'
 import Task from './task/task'
 import Content from './content/content'

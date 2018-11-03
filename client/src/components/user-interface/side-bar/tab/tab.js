@@ -3,7 +3,7 @@ import { Menu, Icon } from 'antd'
 import { connect } from 'react-redux'
 
 import './tab.less'
-import { toggleTag } from '../../reducer/index'
+import { toggleTag } from '../../reducer/actions'
 
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_861606_2iytsrxlsdp.js', // 在 iconfont.cn 上生成
@@ -17,7 +17,7 @@ class Tab extends React.Component {
 
   render () {
     const { todos, currentTag } = this.props
-    const lengthOfAll = todos.filter(item => item.tag === '所有').length
+    const lengthOfUnfinished = todos.filter(item => item.tag === '未完成').length
     const lengthOfFinished = todos.filter(item => item.tag === '已完成').length
     const lengthOfDeleted = todos.filter(item => item.tag === '已删除').length
 
@@ -30,10 +30,10 @@ class Tab extends React.Component {
           mode="inline"
           onClick={this.handleClick}
         >
-          <Menu.Item className="menu-item" key="所有">
+          <Menu.Item className="menu-item" key="未完成">
             <IconFont type="iconfont-order" style={{fontSize: "18px"}} />
-            <span>所有</span>
-            <span className="list-count">{lengthOfAll}</span>
+            <span>未完成</span>
+            <span className="list-count">{lengthOfUnfinished}</span>
           </Menu.Item>
           <Menu.Item className="menu-item" key="已完成">
             <IconFont type="iconfont-completed" style={{fontSize: "18px"}} />

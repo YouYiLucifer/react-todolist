@@ -16,10 +16,13 @@ export default class TitleInput extends React.Component {
 
   handleEnter = e => {
     if (e.keyCode === 13 && e.target.value.trim() !== '') {
+      const createTime = new Date().toLocaleString()
+      console.log(createTime)
       this.props.onKeyUp({
         title: e.target.value, 
         content: '', 
-        tag: '所有'
+        tag: '未完成',
+        createTime
       })
       this.setState({
         title: ''
@@ -30,6 +33,7 @@ export default class TitleInput extends React.Component {
   componentDidMount () {
     this.input.focus()
   }
+
   render () {
     return (
       <div>
