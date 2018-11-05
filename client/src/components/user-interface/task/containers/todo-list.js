@@ -1,7 +1,7 @@
 import React from 'react'
 import { List } from 'antd'
 import { connect } from 'react-redux'
-import { deleteTodo, removeTodo, changeTodoId, toggleTodoTag } from '../../reducer/actions'
+import { deleteTodo, removeTodo, changeTodoId, toggleTodoStatus } from '../../reducer/actions'
 
 import TodoList from '../dumb-components/todo-list'
 import './todo-list.less'
@@ -13,7 +13,7 @@ class TodoListContainer extends React.Component {
   }
 
   handleCheckedChange = id => {
-    this.props.toggleTodoTag(id)
+    this.props.toggleTodoStatus(id)
   }
 
   handleTodoDelete = id => {
@@ -25,7 +25,7 @@ class TodoListContainer extends React.Component {
   }
 
   render () {
-    const todos = this.props.todos.filter(item => item.tag === this.props.currentTag)
+    const todos = this.props.todos.filter(item => item.status === this.props.currentStatus)
 
     return (
       <List
@@ -67,8 +67,8 @@ const mapDispatchToProps = dispatch => {
     changeTodoId (index) {
       dispatch(changeTodoId(index))
     },
-    toggleTodoTag (id) {
-      dispatch(toggleTodoTag(id))
+    toggleTodoStatus (id) {
+      dispatch(toggleTodoStatus(id))
     }
   }
 }

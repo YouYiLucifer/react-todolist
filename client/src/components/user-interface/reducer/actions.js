@@ -23,16 +23,16 @@ return {
 }
 }
 
-export const toggleTag = currentTag => {
+export const toggleStatus = currentStatus => {
   return {
-    type: types.TOGGLE_TAG,
-    currentTag
+    type: types.TOGGLE_STATUS,
+    currentStatus
   }
 }
 
-export const toggleTodoTag = id => {
+export const toggleTodoStatus = id => {
   return {
-    type: types.TOGGLE_TODO_TAG,
+    type: types.TOGGLE_TODO_STATUS,
     id
   }
 }

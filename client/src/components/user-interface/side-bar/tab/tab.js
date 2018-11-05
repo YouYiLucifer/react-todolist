@@ -3,7 +3,7 @@ import { Menu, Icon } from 'antd'
 import { connect } from 'react-redux'
 
 import './tab.less'
-import { toggleTag } from '../../reducer/actions'
+import { toggleStatus } from '../../reducer/actions'
 
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_861606_2iytsrxlsdp.js', // 在 iconfont.cn 上生成
@@ -11,22 +11,22 @@ const IconFont = Icon.createFromIconfontCN({
 
 class Tab extends React.Component {
   handleClick = e => {
-    this.props.toggleTag(e.key)
+    this.props.toggleStatus(e.key)
     console.log(e.key)
   }
 
   render () {
-    const { todos, currentTag } = this.props
-    const lengthOfUnfinished = todos.filter(item => item.tag === '未完成').length
-    const lengthOfFinished = todos.filter(item => item.tag === '已完成').length
-    const lengthOfDeleted = todos.filter(item => item.tag === '已删除').length
+    const { todos, currentStatus } = this.props
+    const lengthOfUnfinished = todos.filter(item => item.status === '未完成').length
+    const lengthOfFinished = todos.filter(item => item.status === '已完成').length
+    const lengthOfDeleted = todos.filter(item => item.status === '已删除').length
 
     return (
       <div>
         <Menu
           theme="dark"
           className="menu"
-          selectedKeys={[currentTag]}
+          selectedKeys={[currentStatus]}
           mode="inline"
           onClick={this.handleClick}
         >
@@ -59,8 +59,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    toggleTag (currentTag) {
-      dispatch(toggleTag(currentTag))
+    toggleStatus (currentStatus) {
+      dispatch(toggleStatus(currentStatus))
     }
   }
 }

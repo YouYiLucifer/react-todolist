@@ -7,12 +7,12 @@ import './task.less'
 
 class Task extends React.Component {
   render () {
-    const { currentTag } = this.props
+    const { currentStatus } = this.props
     return (
       <div className="list-wrapper">
         <div className="head">
-          <h1 style={{fontWeight: "200"}}>{currentTag}</h1>
-          <TitleInput />
+          <h1 style={{fontWeight: "200"}}>{currentStatus}</h1>
+          {currentStatus === "未完成" ? <TitleInput /> : ''}
         </div>
         <TodoList/>
       </div>

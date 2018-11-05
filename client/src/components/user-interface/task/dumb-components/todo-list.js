@@ -1,7 +1,8 @@
 import React from 'react'
-import { Icon, Popconfirm, message } from 'antd';
+import { Icon, Popconfirm, Tag, message } from 'antd';
 
 import './todo-list.less'
+import tags from './todo-tags'
 
 export default class TodoList extends React.Component {
   handleCheckedChange = id => {
@@ -9,38 +10,58 @@ export default class TodoList extends React.Component {
   }
 
   handleTodoDelete = todo => {
-    if (todo.tag !== '已删除') {
-      this.props.onTodoDelete(todo.id)
-    } else {
-      message.success('已删除')
-      this.props.onTodoRemove(todo.id)
-    }
+    this.props.onTodoDelete(todo.id)
+  }
+
+  handleTodoRemove = todo => {
+    message.success('已删除')
+    this.props.onTodoRemove(todo.id)
   }
 
   render () {
     const todo = this.props.todo
-    const isChecked = todo.tag === '已完成' ? 'isChecked' : ''
+    const isChecked = todo.status === '已完成' ? 'isChecked' : ''
 
     return (
       <div className={`${isChecked} wrapper`}>
-        {todo.tag !== '已删除'
+        {todo.status !== '已删除'
         ?
         <Icon
           className="checkbox"
           theme="outlined"
           onClick={() => this.handleCheckedChange(todo.id)} 
-          type={todo.tag === '未完成' ? 'border' : 'check-square'}
+          type={todo.status === '未完成' ? 'border' : 'check-square'}
         />
         :
         ''
         }
         <div className="title-wrapper">
-          <p className="title">{todo.title}</p>
+          <div className="title">
+            {todo.title}
+            {todo.tag
+            ?
+            <Tag
+              className="todo-tag"
+              color={tags[todo.tag]} >
+              {todo.tag}
+            </Tag>
+            :
+            ''
+            }
+          </div>
           <span className="create-time">{todo.createTime}</span>
         </div>
+        {todo.status !== "已删除"
+        ?
+        <Icon
+          className="deleted"
+          type="delete"
+          onClick={() => this.handleTodoDelete(todo)}
+        />
+        :
         <Popconfirm
           title="确定删除？"
-          onConfirm={() => this.handleTodoDelete(todo)}
+          onConfirm={() => this.handleTodoRemove(todo)}
           okText="确定"
           cancelText="取消"
           icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
@@ -50,6 +71,7 @@ export default class TodoList extends React.Component {
             type="delete"
           />
         </Popconfirm>
+        }
       </div>
       )
     }

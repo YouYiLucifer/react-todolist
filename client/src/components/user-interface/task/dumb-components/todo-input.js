@@ -1,13 +1,21 @@
 import React from 'react'
-import { Input } from 'antd'
+import { Input, Select } from 'antd'
+
+const Option = Select.Option
 
 export default class TitleInput extends React.Component {
   constructor () {
     super()
     this.state = {
-      title: ''
+      title: '',
+      tag: '生活'
     }
   }
+
+  componentDidMount () {
+    this.input.focus()
+  }
+
   handleInputChange = e => {
     this.setState({
       title: e.target.value
@@ -21,7 +29,8 @@ export default class TitleInput extends React.Component {
       this.props.onKeyUp({
         title: e.target.value, 
         content: '', 
-        tag: '未完成',
+        status: '未完成',
+        tag: this.state.tag,
         createTime
       })
       this.setState({
@@ -30,20 +39,32 @@ export default class TitleInput extends React.Component {
     }
   }
 
-  componentDidMount () {
-    this.input.focus()
+  handleSelectTag = value => {
+    this.setState({
+      tag: value
+    })
+    console.log(value)
   }
 
   render () {
     return (
       <div>
         <Input
-          placeholder="按回车键添加任务"
-          onChange={this.handleInputChange}
-          onKeyUp={this.handleEnter}
-          ref={input => this.input = input}
-          value={this.state.title}
+        placeholder="按回车键添加任务"
+        onChange={this.handleInputChange}
+        onKeyUp={this.handleEnter}
+        ref={input => this.input = input}
+        value={this.state.title}
         />
+        <Select
+          style={{ width: 66, marginTop: 10}}
+          size="small"
+          placeholder="标签"
+          onChange={this.handleSelectTag}>
+          <Option value="生活">生活</Option>
+          <Option value="工作">工作</Option>
+          <Option value="娱乐">娱乐</Option>
+        </Select>
       </div>
     )
   }

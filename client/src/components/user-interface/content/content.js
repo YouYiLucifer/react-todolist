@@ -14,8 +14,8 @@ class Content extends React.Component {
   }
 
   render () {
-    const { currentTag, currentTodoId } = this.props
-    const todos = this.props.todos.filter(todo => todo.tag === currentTag)
+    const { currentStatus, currentTodoId } = this.props
+    const todos = this.props.todos.filter(todo => todo.status === currentStatus)
     const todo = todos[currentTodoId]
 
     return (
