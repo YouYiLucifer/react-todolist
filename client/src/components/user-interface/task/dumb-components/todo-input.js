@@ -43,7 +43,7 @@ export default class TitleInput extends React.Component {
     this.setState({
       tag: value
     })
-    console.log(value)
+    // console.log(value)
   }
 
   render () {
@@ -59,7 +59,8 @@ export default class TitleInput extends React.Component {
         <Select
           style={{ width: 66, marginTop: 10}}
           size="small"
-          placeholder="标签"
+          // placeholder="标签"
+          defaultValue="生活"
           onChange={this.handleSelectTag}>
           <Option value="生活">生活</Option>
           <Option value="工作">工作</Option>

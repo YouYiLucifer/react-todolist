@@ -14,6 +14,9 @@ class SideBar extends React.Component {
         console.log(res)
         this.props.history.push('/signin')
       })
+      .catch(err => {
+        console.log('登出失败')
+      })
   }
 
   _handleClick = e => {

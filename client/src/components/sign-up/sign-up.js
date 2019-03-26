@@ -11,8 +11,8 @@ class SignUp extends React.Component {
   constructor() {
     super();
     this.state = {
-      confirmDirty: false,
-      autoCompleteResult: []
+      confirmDirty: false
+      // autoCompleteResult: []
     };
   }
 
@@ -71,7 +71,7 @@ class SignUp extends React.Component {
 
     return (
       <div className="sign-form">
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} className="form-wrapper">
           <FormItem label="邮箱">
             {getFieldDecorator("email", {
               rules: [

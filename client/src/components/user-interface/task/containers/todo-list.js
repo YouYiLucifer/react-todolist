@@ -25,14 +25,14 @@ class TodoListContainer extends React.Component {
   }
 
   render () {
-    const todos = this.props.todos.filter(item => item.status === this.props.currentStatus)
+    const todos = this.props.todos ? this.props.todos.filter(item => item.status === this.props.currentStatus) : 0
 
     return (
       <List
         dataSource={todos}
         renderItem={(todo, index) => 
           <List.Item
-            className="list-item"
+            className={`${index === this.props.currentTodoId ? "isActived" : ''}`}
             key={todo.id}
             style={{cursor: 'pointer'}}
             onClick={() => this.handleIndexChange(todo, index)}>

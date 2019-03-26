@@ -17,9 +17,9 @@ class Tab extends React.Component {
 
   render () {
     const { todos, currentStatus } = this.props
-    const lengthOfUnfinished = todos.filter(item => item.status === '未完成').length
-    const lengthOfFinished = todos.filter(item => item.status === '已完成').length
-    const lengthOfDeleted = todos.filter(item => item.status === '已删除').length
+    const lengthOfUnfinished = todos ? todos.filter(item => item.status === '未完成').length : 0
+    const lengthOfFinished = todos ? todos.filter(item => item.status === '已完成').length : 0
+    const lengthOfDeleted = todos ? todos.filter(item => item.status === '已删除').length : 0
 
     return (
       <div>

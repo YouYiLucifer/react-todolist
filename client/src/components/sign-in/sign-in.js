@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Icon, Button, Input, Checkbox } from "antd"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import axios from "axios";
 
 import "../sign-up/sign.less";
@@ -32,12 +32,16 @@ class SignIn extends React.Component {
     e.preventDefault()
   }
 
+  _isChecked = e => {
+    console.log(e)
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form
 
     return (
       <div className="sign-form">
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} className="form-wrapper">
           <FormItem>
             {getFieldDecorator('email', {
               rules: [{required: true, message: '请输入用户名!'}]
@@ -57,7 +61,7 @@ class SignIn extends React.Component {
               valuePropName: 'checked',
               initialValue: true
             })(
-              <Checkbox>记住</Checkbox>
+              <Checkbox onClick={this._isChecked}>记住</Checkbox>
             )}
             <a className="signin-form-forgot" href="" onClick={this._handleClick}>忘记密码</a>
             <Button type="primary" htmlType="submit" className="sign-form-button">
@@ -71,4 +75,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default Form.create()(SignIn)
+export default Form.create()(withRouter(SignIn))

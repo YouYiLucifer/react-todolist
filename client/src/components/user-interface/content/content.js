@@ -15,7 +15,7 @@ class Content extends React.Component {
 
   render () {
     const { currentStatus, currentTodoId } = this.props
-    const todos = this.props.todos.filter(todo => todo.status === currentStatus)
+    const todos = this.props.todos ? this.props.todos.filter(todo => todo.status === currentStatus) : 0
     const todo = todos[currentTodoId]
 
     return (
@@ -33,7 +33,7 @@ class Content extends React.Component {
             </textarea>
           </div>
           : 
-          <h2>No data</h2>
+          ''
         }
       </div>
     )

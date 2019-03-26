@@ -1,16 +1,15 @@
 import * as types from './types'
+import store from '../../../common/js/store'
+
+// const localState = store.localFetch()
 
 const initState = {
-  todos: [
-    {title: 'aa', content: 'aaa', status: '未完成', tag: '工作', id: 0},
-    {title: 'bb', content: 'bbb', status: '已完成', tag: '生活', id: 1},
-    {title: '如果您在使用的过程中碰到问题，可以通过下面几个途径寻求帮助，同时我们也鼓励资深用户通过下面的途径给新人提供帮助。', content: 'ccc', status: '未完成', id: 2}
-  ],
+  todos: store.localFetch(),
   currentStatus: '未完成',
   currentTodoId: 0
 }
 
-export default (state = initState, action) => {
+export default (state =initState, action) => {
   switch(action.type) {
     case types.ADD_TODO:
       return {
@@ -57,3 +56,7 @@ export default (state = initState, action) => {
       return state
   }
 }
+
+// {title: 'aa', content: 'aaa', status: '未完成', tag: '工作', id: 0},
+//     {title: 'bb', content: 'bbb', status: '已完成', tag: '生活', id: 1},
+//     {title: '如果您在使用的过程中碰到问题，可以通过下面几个途径寻求帮助，同时我们也鼓励资深用户通过下面的途径给新人提供帮助。', content: 'ccc', status: '未完成', id: 2}
